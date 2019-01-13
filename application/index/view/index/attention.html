@@ -1,0 +1,35 @@
+{include file="public/top" /} 
+    <!--右侧-->
+    <div class="col-md-8">
+     <!-- 关注粉丝列表 -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          用户列表
+        </div>
+        <div class="panel-body">
+           <div >
+
+            {volist name="attention" id="data"}
+            <table  width=100%><tr></tr><td>
+              
+            <a href="{:url('index/index',array('uid'=>$data['uid']))}"><img class="pull-left" src="__PUBLIC__/static/index/face/{$data.face}" class="img-circle " width="50"  onerror="this.src='__PUBLIC__/static/index/img/default.png'">
+            <div class="pull-left">&nbsp&nbsp&nbsp<img style="vertical-align:text-bottom" width="30" src="__PUBLIC__/static/index/img/rank/{$data.rank}.png" class="img-circle "> {$data.nickname} <img style="vertical-align:text-bottom" width="15" src="__PUBLIC__/static/index/img/sex/{$data.sex}.jpg"  class="img-circle "><br></a> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;个性签名：{$data.autograph}</div></td></tr>
+            
+            </table><hr>
+              {/volist}
+            
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- 右侧 -->
+    
+
+  </div>
+</div>
+
+<!--底部-->
+<nav class="navbar-fixed-bottom" role="navigation"> 底部 </nav>
+</body>
+</html>

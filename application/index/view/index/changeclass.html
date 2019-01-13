@@ -1,0 +1,86 @@
+{include file="public/top" /} 
+  	<!--右侧-->
+  	<div class="col-md-8">
+     <?php if(!$user['rank']){?>
+	  <!--下拉教师添加班级-->
+      <div class="panel-group" id="accordion1">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title"> 
+              <a data-toggle="collapse" data-parent="#accordion1" href="#collapse1"><i class="text-success">添加班级</i></a> </h4>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse ">
+            <div class="panel-body">
+            	<form action="{:url('index/addclass')}" method="post" >
+            		<div class="form-group"><label for="inputfile">班级名称：</label><input style="width:700px" type="text" class="form-control" name="cname" placeholder="请输入名称"></div>
+            		<div class="form-group"><label for="inputfile">班级简介： <textarea name="introd" class="form-control" rows="4" style="width:700px"></textarea></div>
+					<input type="submit" value="确认添加">
+            	</form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 下拉教师添加班级 -->
+      <?php }else{ ?>
+        <!--下拉学生添加班级-->
+      <div class="panel-group" id="accordion1">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title"> 
+              <a data-toggle="collapse" data-parent="#accordion1" href="#collapse1"><i class="text-success">添加班级</i></a> 
+            </h4>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse ">
+            <div class="panel-body">
+             
+              <table  class="table table-hover table-striped">
+              
+              {volist name="cla" id="value"}
+                    <tr><td width='20%'>名称</td><td>{$value['cname']} 
+                      <a class="pull-right" href="{:url('index/addclass',array('cname'=>$value['cname'],'introd'=>$value['introd']))} ">加入班级</a>
+                    </td></tr>
+                    <tr><td>简介</td><td>{$value['introd']}</td></tr>
+               {/volist}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 下拉学生添加班级 -->
+      <?php } ?>
+	  <?php 
+		foreach ($class as $key => $value) {
+	  ?>
+  	  <div class="panel panel-default">
+        <div class="panel-heading"><strong><?php print($value['cname']) ?></strong><a class="pull-right" href="{:url('index/delclass',array('cname'=> $value['cname'],'uid'=>$user['id']))}">删除</a></div>
+        <div class="panel-body">
+          <?php 
+          	foreach($value['name'] as $value){
+            
+		  ?>
+
+			<a  href="{:url('index/index',array('uid'=>$value['id']))}"><img class="pull-left" src="__PUBLIC__/static/index/face/{$value.face}" class="img-circle " width="50"  onerror="this.src='__PUBLIC__/static/index/img/default.png'"> <img style="vertical-align:text-bottom" width="30" src="__PUBLIC__/static/index/img/rank/{$value.rank}.png" class="img-circle "> {$value.nickname} <br> 
+			性别：<img style="vertical-align:text-bottom" width="20" src="__PUBLIC__/static/index/img/sex/{$value.sex}.jpg" class="img-circle "><br>
+			个性签名：{$value.autograph}</a><hr>
+			
+			<?php
+          		}
+          	?>
+
+        </div>
+      </div>
+      <?php
+        }
+      ?>
+  	</div>
+    <!-- 右侧 -->
+		
+
+  </div>
+</div>
+
+<!--底部-->
+<nav class="navbar-fixed-bottom" role="navigation"> 底部 </nav>
+</body>
+</html>

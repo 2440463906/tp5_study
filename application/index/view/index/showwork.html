@@ -1,0 +1,46 @@
+{include file="public/top" /} 
+    <!--右侧-->
+    <div class="col-md-8">
+     <!-- 作业面板 -->
+     
+     {volist name="swork" id="vo"}
+      <div class="panel-group" id="accordion1">
+        <div class="panel panel-default">
+          <div class="panel-heading"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{$vo.id}">
+          <img style="vertical-align:text-bottom" width="40" src="__PUBLIC__/static/index/img/rank/{$vo.user.rank}.png" class="img-circle "> {$vo.user.nickname} 的作业</a>
+          </div>
+        <div id="collapse{$vo.id}" class="panel-collapse collapse ">
+            <div class="panel-body">
+              <?php //dump($vo)?>
+              {$vo.files}
+              <a href="__PUBLIC__/work/{$vo.wid}/{$vo.uid}/{$vo.files}" class="pull-right">下载查看</a><hr>
+              <form action="{:url('index/addswork')}" enctype="multipart/form-data" method="post">
+              <label >作业成绩&nbsp;&nbsp;&nbsp;</label>
+              <label class="radio-inline"><input type="radio" name="grade"  value="A" checked> A</label>
+              <label class="radio-inline"><input type="radio" name="grade"  value="B"> B</label>
+              <label class="radio-inline"><input type="radio" name="grade"  value="C"> C</label>
+              <label class="radio-inline"><input type="radio" name="grade"  value="D"> D</label>
+              <label class="radio-inline"><input type="radio" name="grade"  value="E"> E</label><hr>
+              </label>
+              <label >教师评价</label>
+              <textarea class="form-control" rows="3" name="comment"></textarea>
+              <input type="hidden" name="id" value="{$vo.id}">
+              <input  type="submit" value="上传" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/volist}
+
+    </div>
+    <!-- 右侧 -->
+    
+
+  </div>
+</div>
+
+<!--底部-->
+<nav class="navbar-fixed-bottom" role="navigation"> 底部 </nav>
+</body>
+</html>

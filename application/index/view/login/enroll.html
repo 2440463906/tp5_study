@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="__PUBLIC__/bootstrap/js/jquery-2.1.1.min.js"></script>
+<script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+<script>
+  $(function(){  
+
+        //验证用户名是否存在
+       $('#name').keyup(function(){
+            var name = $('#name').val();
+            $.ajax({  
+               type:'post',
+               url:"{:url('login/vername')}",  
+               data:{'username':name},  
+               dataType:"json",  
+               error:function(data){  
+                   alert("错误");  
+               },  
+               success:function(data){  
+                  //alert(JSON.stringify(data));
+                   if(data){
+                      $(".enrollname").html("用户名已存在");
+                     $(".enrollname").css('color',"red");
+                     $("#login").attr('disabled',true); 
+                   }else{
+                    
+                      $(".enrollname").html("用户名不存在");
+                      $(".enrollname").css('color',"blue");
+                      $("#login").attr('disabled',false); 
+                   }
+                   return false;
+               }  
+           }); 
+
+       })    
+       //注册验证
+       $('#login').click(function(){ 
+          var pwd = $("#password").val();
+
+          var cpwd = $("#pswd").val();
+          if(pwd != cpwd){
+            alert("两次密码不一致!");
+            $("#pswd").val("");
+            return false;
+          }
+
+            var login = $('#form').serialize();
+           
+           $.ajax({  
+               type:'post',
+               url:"{:url('login/verenroll')}",  
+               data:login,  
+               dataType:"json",  
+               error:function(data){  
+                   alert("错误");  
+               },  
+               success:function(data){  
+                 if(data.code){
+                    location.href = data.url;
+                   alert(data.msg);
+                  }else{
+                    alert(data.msg);
+                  }
+                     
+               }  
+           });  
+       });    
+       //回车事件
+       $(document).keydown(function(event){ 
+          if(event.keyCode==13){ 
+          $("#login").click(); 
+           } 
+       });   
+
+       
+   })   
+</script>
+</head>
+
+<body>
+<div class=".container-fluid">
+  <div class="row">
+    <div class="col-md-8"></div>
+    <!--表单-->
+    <div class="col-md-3">
+      <br><br>
+      <div class="panel panel-default">
+        <div class="panel-heading">博客注册</div>
+        <div class="panel-body">
+          <form role="form" id="form">
+            <div class="form-group">
+              <label >用户名</label><span class="pull-right enrollname" ></span>
+              <input type="text" class="form-control" name="username" id="name" placeholder="请输入名称" autofocus="autofocus" required="required">
+            </div>
+            <div class="form-group">
+              <label>密码</label>
+              <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码" required="required">
+            </div>
+            <div class="form-group">
+              <label >确认密码</label>
+              <input type="password" class="form-control" id="pswd"  placeholder="请确认密码" required="required">
+            </div>
+            <div class="form-group">
+              <label >Email</label>
+              <input type="email" class="form-control" name="email"  placeholder="Email" required="required">
+            </div>
+            <div class="form-group">
+              <label class="radio-inline">
+                <input type="radio" value="1" name="sex" checked> 男性 
+              </label>
+              <label class="radio-inline">
+                <input type="radio" value="0" name="sex"> 女性 
+              </label>
+              <label class="radio-inline">
+                <input type="radio" value="1" name="rank" checked>
+              学生 </label>
+              <label class="radio-inline">
+                <input type="radio" value="0" name="rank">
+                教师 </label>
+            </div>
+            <button type="button" class="btn btn-default" id="login">提交</button>
+            <button type="reset" class="btn btn-default pull-right">重置</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>
+</body>
+</html>

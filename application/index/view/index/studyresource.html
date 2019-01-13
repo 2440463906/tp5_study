@@ -1,0 +1,50 @@
+{include file="public/top" /}
+
+    <!--右侧-->
+    <div class="col-md-8"> 
+        
+       <?php if(!$user['rank']){?>   
+      <!-- 上传文件 -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          上传文件
+        </div>
+        <div class="panel-body">
+          <form action="{:url('index/uploads')}" enctype="multipart/form-data" method="post">
+         
+          <input class="pull-left" type="file" name="zip" />
+          <input  type="submit" value="上传" />
+          </form>
+        </div>
+      </div>
+      <?php } ?>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          教学资源
+
+        </div>
+        <div class="panel-body">
+          <table class="table table-hover">
+            {volist name="files" id="value"}
+            <tr>
+              <td>{$value}</td><td><a href="__PUBLIC__/studyresource/{$value}">下载</a></td>
+            </tr>
+            {/volist}
+          </table>
+        </div>
+      </div>
+      
+
+
+</div>
+    <!-- 右侧 -->
+
+
+  </div>
+</div>
+
+<!--底部-->
+<nav class="navbar-fixed-bottom" role="navigation"> 底部 </nav>
+</body>
+</html>

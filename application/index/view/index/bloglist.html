@@ -1,0 +1,37 @@
+{include file="public/top" /}
+
+    <!--右侧-->
+    <div class="col-md-8"> 
+     <!-- 博客列表 -->
+      <div class="panel panel-default">
+        <div class="panel-heading">讨论</div>
+        <div class="panel-body">
+          <div >
+            {volist name="article" id="data"}
+            <table  width=100%><tr></tr><td>
+            	<!-- 判断是否是自己的 -->
+              <?php //if($user['id'] == $data['uid']){?>
+              <!-- <a href="" class="pull-right"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 删除&nbsp&nbsp</a> -->
+              <?php //}?>
+              
+            <a href="{:url('index/index',array('uid'=>$data['uid']))}"><img class="pull-left" src="__PUBLIC__/static/index/face/{$data.face}" class="img-circle " width="50"  onerror="this.src='__PUBLIC__/static/index/img/default.png'">
+            <div class="pull-left">&nbsp&nbsp&nbsp<img style="vertical-align:text-bottom" width="30" src="__PUBLIC__/static/index/img/rank/{$data.rank}.png" class="img-circle ">{$data.nickname}</a><br>&nbsp&nbsp&nbsp<?php echo date('Y年m月d日 H:i:s',$data['create_time']) ?><br>&nbsp&nbsp&nbsp热度：{$data.hot}</div></td></tr>
+            <tr><td><hr><a href="{:url('index/showblog',array('id'=>$data['id']))}" target="_blank"><b class="text-danger">{$data.title}</b><br><p class="text-muted">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{$data.desc}</p></a></td></tr>
+            </table><hr>
+              {/volist}
+            <!-- <img src="/static/index/face/{$user.face}" width="50"  onerror="this.src='/static/index/public/img/default.png'" class="img-circle "> -->
+          </div>
+
+          
+        </div>
+      </div>
+      <!-- 博客列表 -->
+      
+    </div>
+    <!-- 右侧 -->
+  </div>
+</div>
+<!--底部-->
+<nav class="navbar-fixed-bottom" role="navigation"> 底部 </nav>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{include file="public/top" /} 
+    <!--右侧-->
+    <div class="col-md-8">
+     <?php if(!$user['rank']){?>
+    <!--下拉教师添加作业-->
+      <div class="panel-group" id="accordion1">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion1" 
+                href="#collapse1"><i class="text-success">布置作业</i></a> </h4>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse ">
+            <div class="panel-body">
+              <form action="{:url('index/addwork')}" method="post" >
+                <div class="form-group"><label for="inputfile">作业名称：</label><input required="required" style="width:700px" type="text" class="form-control" name="title" placeholder="请输入名称"></div>
+                <div class="form-group"><label for="inputfile">作业要求： <textarea name="content" required="required" class="form-control" rows="4" style="width:700px"></textarea></div>
+                <label for="name">班级列表</label>
+                <select class="form-control" name="cname">
+                  {volist name="class" id="value"}
+                    <option value="{$value.cname}">{$value.cname}</option>
+                  {/volist}
+                </select>
+                <input type="hidden" name="uid" value="{$user.id}">
+                <input type="submit" value="确认添加">
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 下拉教师添加作业 -->
+      <?php }else{ ?>
+        <!--下拉学生添加作业-->
+      <div class="panel-group" id="accordion1">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion1" 
+                href="#collapse1"><i class="text-success">提交作业</i></a> </h4>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse ">
+            <div class="panel-body">
+
+              <form action="{:url('index/writework')}" enctype="multipart/form-data" method="post" >
+         
+                  <input class="pull-left" type="file" name="zip" /><br>
+          
+                
+                <select class="form-control" name="wid">
+                  {volist name="class" id="vo"}
+                    {volist name="vo['title']" id="value"}
+                    <?php if(!$value['state']){?>
+                    <option value="{$value.id}">{$value.title}</option>
+                    <?php }?>
+                    {/volist}
+                  {/volist}
+                </select>
+                <input type="hidden" name="uid" value="{$user.id}">
+                <input type="submit" value="确认添加">
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 下拉学生添加作业 -->
+      <?php } ?>
+
+
+    <!-- 作业列表 -->
+    {volist name="class" id="vo"}
+      <div class="panel panel-default">
+        <div class="panel-heading"><strong>{$vo.cname}</strong></div>
+        <div class="panel-body">
+         {volist name="vo['title']" id="value"}
+          <table  width=100% class="table  table-striped">
+            <tr><td>{$value.title}
+              <?php if(!$user['rank']){?> 
+              <a class="pull-right" href="{:url('index/showwork',array('wid'=>$value['id']))}">修改作业</a> 
+              <?php }else{?>
+              <img style="vertical-align:text-bottom" width="30" src="__PUBLIC__/static/index/img/work/state/{$value.state}.png"class="img-circle pull-right"><p class="pull-right">状态： </p>
+              <?php }?>
+            </td></tr>
+            <tr><td>{$value.content}</td></tr>
+          </table>
+         {/volist}
+        </div>
+      </div>
+    {/volist}
+    </div>
+    <!-- 右侧 -->
+    
+
+  </div>
+</div>
+
+<!--底部-->
+<nav class="navbar-fixed-bottom" role="navigation"> 底部 </nav>
+</body>
+</html>
