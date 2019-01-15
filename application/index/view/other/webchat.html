@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>webchat</title>
+</head>
+<body>
+	<div style="width:600px;margin:0 auto">
+		<iframe src="{:url('other/world',array('cname'=>$cname))}" style="height:600px;width:600px;margin:0 auto"></iframe>
+		<div>
+		  <form action="{:url('other/addchat')}" method="post">    
+	          
+	          <textarea placeholder="聊天字数少于100" maxlength="100" style="width:100%;height: 60px" required="required" name="centent"></textarea>
+	          <!-- 隐藏表单传值 -->
+	          <input type="hidden" name="cname" value="{$cname}">
+	          <button type="submit"> 发送</button>
+          </form>
+
+		</div>
+	</div>
+</body>
+</html>

@@ -105,6 +105,7 @@ body {padding: 60px}
           <table  class="table table-hover"><tr><td>
           昵称：</td><td> <img style="vertical-align:text-bottom" width="30" src="__PUBLIC__/static/index/img/rank/{$use.rank}.png" class="img-circle ">{$use.nickname}</td></tr><tr><td>
           头像：</td><td><img src="__PUBLIC__/static/index/face/{$use.face}" width="50"  onerror="this.src='__PUBLIC__/static/index/img/default.png'" class="img-circle "></td></tr><tr><td>
+          等级：</td><td>{$use.expe}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经验值：({$use.experience}/{$use.experi})</td></tr><tr><td>
           性别：</td><td><?php echo $use['sex']?"男":"女" ?></td></tr><tr><td>
           职业：</td><td><?php echo $use['rank']?"老师":"学生" ?></td></tr><tr><td>
           个性签名：</td><td>{$use.autograph}</td></tr><tr><td>

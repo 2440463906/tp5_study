@@ -72,6 +72,7 @@ class Login extends Controller
         $data=input('post.');
         $data['password'] = md5($data['password']);
         $data['create_time'] = time();
+        $data['secretkey'] = md5($data['username']);
         //返回错误信息
         if (!$validate->check($data)) {
             $this->error ($validate->getError());

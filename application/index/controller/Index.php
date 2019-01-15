@@ -21,6 +21,9 @@ class index extends Controller
     	if(input('uid')==null||input('uid')==$user['id']){
     		$uid = $user['id'];
     		$use = db('user')->where('id',$uid)->find();
+            // 等级
+            $use['expe'] = floor($use['experience']/100);
+            $use['experi'] = $use['expe']*100+100;
 
     		//班级信息
     		$use['clas'] = db('class')->where('uid',$uid)->select();
@@ -29,6 +32,9 @@ class index extends Controller
     	}else{
     		$uid = input('uid');
     		$use = db('user')->where('id',$uid)->find();
+             // 等级
+            $use['expe'] = floor($use['experience']/100);
+            $use['experi'] = $use['expe']*100+100;
 
     		//班级信息
     		$use['clas'] = db('class')->where('uid',$uid)->select();
@@ -77,11 +83,11 @@ class index extends Controller
     {
     	$user = db('user')->where('username',session('name'))->find();
     	$class = db('class')->where('uid',$user['id'])->select();
+
     	foreach ($class as $key => $value) {
-    		$class["$key"]['name'] = db('class')->alias('a')->join('user b', 'a.uid = b.id')->where('cname',$value['cname'])->field('b.*')->select();
+    		$class["$key"]['name'] = db('class')->alias('a')->join('user b', 'a.uid = b.id')->where('cname',$value['cname'])->field('a.longitude,a.latitude,b.*')->select();
     		
     	}
-
         $cla = Db::table('class')->group('cname')->select();
         
 
@@ -139,11 +145,30 @@ class index extends Controller
     	}
     	$data['create_time'] = time();
     	if(Db::table('article')->insert($data)){
+            Db::table('user')->where('id', $data['uid'])->setInc('experience',10);
     		$this->success('发表成功',url('index/index'),'',1);
     	}else{
 			$this->error('发表失败');
     	}
     	
+    }
+
+    //接口发表文章
+    public function keyaddblog()
+    {
+        $data = input('post.');
+        $secretkey = input('get.secretkey');
+        $user = Db::table('user')->where('secretkey',$secretkey)->find();
+        $data['secretkey'] = $user['id'];
+
+        $data['create_time'] = time();
+        if(Db::table('article')->insert($data)){
+            Db::table('user')->where('id', $data['uid'])->setInc('experience',10);
+            $this->success('发表成功',url('index/index'),'',1);
+        }else{
+            $this->error('发表失败');
+        }
+        
     }
     //发布评论
     public function comment()

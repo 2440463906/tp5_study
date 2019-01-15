@@ -1,4 +1,54 @@
 {include file="public/top" /} 
+
+<!-- 经纬度获取 -->
+<script>
+    var a;
+    var b;
+
+    function getLocation(){
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }else{
+            x.innerHTML="Geolocation is not supported by this browser.";
+        }
+    }
+    getLocation();
+
+    function showPosition(position){
+        
+        //x.innerHTML="经度: " + position.coords.latitude + "<br />纬度: " + position.coords.longitude;
+
+        a = position.coords.latitude;
+        b = position.coords.longitude;
+        $(".latitude").val(a);
+        $(".longitude").val(b);
+
+    }
+
+        // function rollcall(){
+        //     $.ajax({  
+        //        type:'post',
+        //        url:"{:url('other/rollcall')}",  
+        //        data:{latitude:a,longitude:b},  
+        //        dataType:"json",  
+        //        error:function(data){  
+        //            alert("错误");  
+        //        },  
+        //        success:function(data){  
+        //          if(data.code){
+        //            alert(data.msg);
+        //           }else{
+        //             alert(data.msg);
+        //           }
+                     
+        //        }  
+        //    });;
+        // };
+
+         
+ </script>
+
+
   	<!--右侧-->
   	<div class="col-md-8">
      <?php if(!$user['rank']){?>
@@ -50,17 +100,46 @@
       <!-- 下拉学生添加班级 -->
       <?php } ?>
 	  <?php 
+    
 		foreach ($class as $key => $value) {
 	  ?>
   	  <div class="panel panel-default">
-        <div class="panel-heading"><strong><?php print($value['cname']) ?></strong><a class="pull-right" href="{:url('index/delclass',array('cname'=> $value['cname'],'uid'=>$user['id']))}">删除</a></div>
+        <div class="panel-heading"><strong><?php print($value['cname']) ?></strong>
+          <a class="pull-right" href="{:url('index/delclass',array('cname'=> $value['cname'],'uid'=>$user['id']))}">删除</a>
+          <!-- 签到 -->
+          <form action="{:url('other/rollcall')}" class="pull-right" method="post">    
+        
+            <!-- 隐藏表单传值 -->
+            <input type="hidden" name="cname" value="<?php echo $value['cname']; ?>">
+            <input type="hidden" name="latitude" class="latitude" value="">
+            <input type="hidden" name="longitude" class="longitude" value="">
+
+            <button type="submit" class="pull-right"> 签到</button>
+          </form>
+          <?php 
+          if($user['rank']== 0){
+          ?>
+            <a href="{:url('other/delcall')}?cname={$value.cname}">清空签到</a>
+          <?php 
+          }
+          ?>
+          <a href="{:url('other/webchat',array('cname'=> $value['cname']))}" target="_blank">web聊天室</a>
+        </div>
         <div class="panel-body">
           <?php 
           	foreach($value['name'] as $value){
             
 		  ?>
 
-			<a  href="{:url('index/index',array('uid'=>$value['id']))}"><img class="pull-left" src="__PUBLIC__/static/index/face/{$value.face}" class="img-circle " width="50"  onerror="this.src='__PUBLIC__/static/index/img/default.png'"> <img style="vertical-align:text-bottom" width="30" src="__PUBLIC__/static/index/img/rank/{$value.rank}.png" class="img-circle "> {$value.nickname} <br> 
+			<a  href="{:url('index/index',array('uid'=>$value['id']))}"><img class="pull-left" src="__PUBLIC__/static/index/face/{$value.face}" class="img-circle " width="50"  onerror="this.src='__PUBLIC__/static/index/img/default.png'"> <img style="vertical-align:text-bottom" width="30" src="__PUBLIC__/static/index/img/rank/{$value.rank}.png" class="img-circle "> {$value.nickname} 
+        <p class="pull-right">
+        <?php 
+        if($value['longitude']== 0){
+          echo "未签到!　　　　　　　　　　";
+        }else{ 
+          echo "上课中! 　　经纬度：(".$value['latitude']."/".$value['longitude'].")";
+        }
+        ?></p><br> 
 			性别：<img style="vertical-align:text-bottom" width="20" src="__PUBLIC__/static/index/img/sex/{$value.sex}.jpg" class="img-circle "><br>
 			个性签名：{$value.autograph}</a><hr>
 			
@@ -79,6 +158,9 @@
 
   </div>
 </div>
+
+
+
 
 <!--底部-->
 <nav class="navbar-fixed-bottom" role="navigation"> 底部 </nav>

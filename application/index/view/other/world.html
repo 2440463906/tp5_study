@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta http-equiv="refresh" content="2">
+<script src="__PUBLIC__/bootstrap/js/jquery-2.1.1.min.js"></script>
+<script>
+	//滑到页面底部
+$(function () {window.scrollTo(0, document.body.scrollHeight);})
+
+// setInterval(function(){
+//     window.location.reload();
+//     window.scrollTo(0, document.body.scrollHeight);
+// },2000)
+</script>
+</head>
+<body>
+
+
+
+{volist name="webchat" id="data"}
+<p><a  style="color: red">{$data.user}</a>　　<a><?php echo date("Y-m-d ",$data['time']); ?></a></p><br/><p>{$data.centent}</p> <hr>
+{/volist}
+
+<p>-----------------------------<?php echo date("Y/m/d");?>----------------------------</p>
+
+</body>
+</html>

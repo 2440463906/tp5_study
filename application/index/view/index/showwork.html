@@ -8,6 +8,7 @@
         <div class="panel panel-default">
           <div class="panel-heading"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{$vo.id}">
           <img style="vertical-align:text-bottom" width="40" src="__PUBLIC__/static/index/img/rank/{$vo.user.rank}.png" class="img-circle "> {$vo.user.nickname} 的作业</a>
+          <a class="pull-right" ><?php if($vo['grade'] != ""){echo "已评分:".$vo['grade'];}?></a>
           </div>
         <div id="collapse{$vo.id}" class="panel-collapse collapse ">
             <div class="panel-body">
