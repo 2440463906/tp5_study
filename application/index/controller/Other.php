@@ -6,6 +6,12 @@ namespace app\index\controller;
 	use think\Controller;
 class other extends Controller
 {
+    public function  _initialize(){   //控制器继承系统控制器
+        //验证是否登录
+        if(!session('?name')){
+            $this->redirect('login/login');
+        }
+    }
 	// 签到
 	public function rollcall()
     {

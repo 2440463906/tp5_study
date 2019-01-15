@@ -16,7 +16,7 @@
               
             <a href="{:url('index/index',array('uid'=>$data['uid']))}"><img class="pull-left" src="__PUBLIC__/static/index/face/{$data.face}" class="img-circle " width="50"  onerror="this.src='__PUBLIC__/static/index/img/default.png'">
             <div class="pull-left">&nbsp&nbsp&nbsp<img style="vertical-align:text-bottom" width="30" src="__PUBLIC__/static/index/img/rank/{$data.rank}.png" class="img-circle ">{$data.nickname}</a><br>&nbsp&nbsp&nbsp<?php echo date('Y年m月d日 H:i:s',$data['create_time']) ?><br>&nbsp&nbsp&nbsp热度：{$data.hot}</div></td></tr>
-            <tr><td><hr><a href="{:url('index/showblog',array('id'=>$data['id']))}" target="_blank"><b class="text-danger">{$data.title}</b><br><p class="text-muted">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{$data.desc}</p></a></td></tr>
+            <tr><td><hr><a href="{:url('index/showblog',array('id'=>$data['id'],'uid'=>$data['uid']))}" target="_blank"><b class="text-danger">{$data.title}</b><br><p class="text-muted">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{$data.desc}</p></a></td></tr>
             </table><hr>
               {/volist}
             <!-- <img src="/static/index/face/{$user.face}" width="50"  onerror="this.src='/static/index/public/img/default.png'" class="img-circle "> -->

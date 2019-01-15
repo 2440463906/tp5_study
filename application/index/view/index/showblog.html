@@ -4,7 +4,14 @@
       
 
         <div class="panel panel-default">
-          <div class="panel-heading">我的讨论</div>
+          <div class="panel-heading">
+            我的讨论
+              <?php if($boole == null){ ?>
+                <a href="{:url('index/addcollect',array('aid'=>$article['id']))}" class="btn btn-warning btn-xs pull-right"> + 收藏 </a>
+              <?php }else{  ?>
+                 <a href="{:url('index/delcollect',array('aid'=>$article['id']))}" class="btn btn-warning btn-xs pull-right">取消收藏</a>
+              <?php }?>
+          </div>
           <div class="panel-body">
             <div class="panel panel-default">
               <h3 class="text-center" ><b>{$article.title}</b></h3><p class="pull-right">热度：{$article.hot}&nbsp;&nbsp;&nbsp;&nbsp;</p>

@@ -205,14 +205,21 @@ class index extends Controller
     public function showblog()
     {
         $article = Db::table('article')->where('id',input('id'))->find();
+
         $article['nickname'] = Db::table('user')->where('id',$article['uid'])->field('user.nickname')->find();
         //dump($article['nickname']);
+        
         $this -> assign('article',$article);
 
         //显示评论
         $comment =  db('comment')->alias('a')->join('user b', 'a.uid = b.id')->where('aid', input('id'))->order('id','desc')->field('a.*,b.nickname,b.face,b.rank')->select();
         
         $this -> assign('comment',$comment);
+
+        //判断收藏
+        $boole = Db::table('collection')->where(['nickname'=>session('name'),'aid'=>input('id')])->find();
+        $this -> assign('boole',$boole);
+
         //增加热度
         Db::table('article')->where('id', input('id'))->setInc('hot');
 
@@ -443,6 +450,22 @@ class index extends Controller
         }
         $this -> assign('attention',$attention);
         echo $this->view->fetch();
+    }
+
+    //添加关注
+    public function addcollect()
+    {
+        Db::table('collection')->insert(['nickname'=>session('name'),'aid'=>input('aid')]);
+        echo "<script>window.history.go(-1);location.reload()</script>";
+    }
+    //取消关注
+    public function delcollect()
+    {
+        Db::table('collection')->where(['nickname'=>session('name'),'aid'=>input('aid')])->delete();
+
+        echo "<script>window.history.go(-1);location.reload()</script>";
+
+
     }
         
 }
