@@ -20,6 +20,10 @@ class index extends Controller
         $announce = Db::table('announce')->select();
         $this -> assign('announce',$announce);
 
+        //系统信息
+        $system = Db::table('admin_system')->where('id',1)->find();
+        $this -> assign('system',$system);
+
     	//信息  判断跳转的页面是否为自己的主页
     	if(input('uid')==null||input('uid')==$user['id']){
     		$uid = $user['id'];

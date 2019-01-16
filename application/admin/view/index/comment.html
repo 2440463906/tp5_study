@@ -35,7 +35,7 @@ function p_del() {
 				      <td>{$vo.aid}</td>
 				      <td>{$vo.comment}</td>
 				      <td>{$vo.uid}</td>
-				      <td><a href="{:url('index/delblog',array('id'=>$vo['id']))}" onclick="javascript:return p_del()">删除</a></td>
+				      <td><a href="{:url('index/delcomm',array('id'=>$vo['id']))}" onclick="javascript:return p_del()">删除</a></td>
 				    </tr>
 				  	
 				  </tbody>

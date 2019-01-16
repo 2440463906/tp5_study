@@ -10,10 +10,62 @@ Target Server Type    : MYSQL
 Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2019-01-15 15:01:58
+Date: 2019-01-16 19:19:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `admin_system`
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_system`;
+CREATE TABLE `admin_system` (
+  `title` varchar(50) DEFAULT NULL,
+  `subhead` varchar(50) DEFAULT NULL COMMENT '副标题',
+  `admin_qq` varchar(50) DEFAULT NULL,
+  `admin_tel` varchar(50) DEFAULT NULL,
+  `id` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of admin_system
+-- ----------------------------
+INSERT INTO `admin_system` VALUES ('课程教学辅助系统', '计算机导论', '1111111111', '1111111111', '1');
+
+-- ----------------------------
+-- Table structure for `admin_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_user`;
+CREATE TABLE `admin_user` (
+  `id` int(11) NOT NULL,
+  `adminname` varchar(20) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of admin_user
+-- ----------------------------
+INSERT INTO `admin_user` VALUES ('0', 'admin', 'admin');
+
+-- ----------------------------
+-- Table structure for `announce`
+-- ----------------------------
+DROP TABLE IF EXISTS `announce`;
+CREATE TABLE `announce` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(20) NOT NULL DEFAULT '公告标题',
+  `content` varchar(500) NOT NULL DEFAULT '公告内容',
+  `adminname` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of announce
+-- ----------------------------
+INSERT INTO `announce` VALUES ('5', '计算机', '啊啊啊啊啊', 'admin');
+INSERT INTO `announce` VALUES ('4', 'adsf', '', 'admin');
 
 -- ----------------------------
 -- Table structure for `article`
@@ -37,9 +89,8 @@ CREATE TABLE `article` (
 INSERT INTO `article` VALUES ('31', '讨论帖', '欢迎各位同学前来一起讨论学习。', '欢迎各位同学前来一起讨论学习。', '9', '1540439503', '36', '0');
 INSERT INTO `article` VALUES ('32', '我叫小白胖', '我叫小白胖', '<span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span><span>我叫小白胖</span></span>', '0', '1540440327', '36', '0');
 INSERT INTO `article` VALUES ('33', '讨论帖', '欢迎各位同学前来一起讨论学习。', '欢迎各位同学前来一起讨论学习。', '9', '1540440400', '37', '0');
-INSERT INTO `article` VALUES ('34', '怎么报到呀', '安徽新华学院怎么报到呀', '安徽新华学院怎么报到呀，安徽新华', '0', '1540440700', '37', '30');
+INSERT INTO `article` VALUES ('34', '怎么报到呀', '安徽新华学院怎么报到呀', '安徽新华学院怎么报到呀，安徽新华', '0', '1540440700', '37', '61');
 INSERT INTO `article` VALUES ('35', '讨论帖', '欢迎各位同学前来一起讨论学习。', '欢迎各位同学前来一起讨论学习。', '9', '1540440799', '38', '0');
-INSERT INTO `article` VALUES ('36', '计算机', 'aaa', 'adfasdfadf', '0', '1547429768', '36', '0');
 INSERT INTO `article` VALUES ('37', '讨论帖', '　　欢迎各位同学前来一起讨论学习。', '　　欢迎各位同学前来一起讨论学习。', '9', '1547432518', '39', '0');
 
 -- ----------------------------
@@ -51,7 +102,7 @@ CREATE TABLE `attention` (
   `mid` int(11) NOT NULL COMMENT '我的id',
   `uid` int(11) NOT NULL COMMENT '他的id',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='关注表';
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='关注表';
 
 -- ----------------------------
 -- Records of attention
@@ -59,7 +110,7 @@ CREATE TABLE `attention` (
 INSERT INTO `attention` VALUES ('9', '37', '36');
 INSERT INTO `attention` VALUES ('10', '38', '37');
 INSERT INTO `attention` VALUES ('11', '38', '36');
-INSERT INTO `attention` VALUES ('12', '36', '37');
+INSERT INTO `attention` VALUES ('15', '36', '38');
 
 -- ----------------------------
 -- Table structure for `class`
@@ -73,14 +124,31 @@ CREATE TABLE `class` (
   `longitude` int(10) NOT NULL DEFAULT '0' COMMENT '经度',
   `latitude` int(10) NOT NULL DEFAULT '0' COMMENT '纬度',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of class
 -- ----------------------------
 INSERT INTO `class` VALUES ('10', '36', '网络工程2班', '计算机网络工程2班', '121', '31');
 INSERT INTO `class` VALUES ('14', '37', '网络工程2班', '计算机网络工程师', '0', '0');
+INSERT INTO `class` VALUES ('17', '38', '网络工程', '网络工程师', '0', '0');
 INSERT INTO `class` VALUES ('16', '36', '网络工程', '网络工程师', '0', '0');
+
+-- ----------------------------
+-- Table structure for `collection`
+-- ----------------------------
+DROP TABLE IF EXISTS `collection`;
+CREATE TABLE `collection` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL COMMENT '用户名',
+  `aid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of collection
+-- ----------------------------
+INSERT INTO `collection` VALUES ('7', '章娟', '34');
 
 -- ----------------------------
 -- Table structure for `comment`
@@ -98,7 +166,6 @@ CREATE TABLE `comment` (
 -- Records of comment
 -- ----------------------------
 INSERT INTO `comment` VALUES ('22', '37', '34', '这你都不知道');
-INSERT INTO `comment` VALUES ('23', '37', '33', '111');
 INSERT INTO `comment` VALUES ('24', '36', '33', '啊啊');
 INSERT INTO `comment` VALUES ('25', '36', '34', '啊啊');
 
@@ -113,13 +180,15 @@ CREATE TABLE `swork` (
   `wid` int(20) NOT NULL,
   `comment` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of swork
 -- ----------------------------
 INSERT INTO `swork` VALUES ('1', null, '37', '6', null);
 INSERT INTO `swork` VALUES ('2', 'E', '37', '7', '');
+INSERT INTO `swork` VALUES ('3', null, '37', '8', null);
+INSERT INTO `swork` VALUES ('4', null, '38', '6', null);
 
 -- ----------------------------
 -- Table structure for `twork`
@@ -132,7 +201,7 @@ CREATE TABLE `twork` (
   `cname` varchar(50) NOT NULL,
   `uid` int(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of twork
@@ -140,6 +209,7 @@ CREATE TABLE `twork` (
 INSERT INTO `twork` VALUES ('6', '计算机导论', '计算机导论实验报告', '网络工程', '36');
 INSERT INTO `twork` VALUES ('7', '计算机', '计算机实验报告', '网络工程', '36');
 INSERT INTO `twork` VALUES ('8', '啊', '啊啊啊', '网络工程2班', '36');
+INSERT INTO `twork` VALUES ('9', '去去去', '啊啊啊', '网络工程', '36');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -168,7 +238,6 @@ CREATE TABLE `user` (
 INSERT INTO `user` VALUES ('36', '章娟', '698d51a19d8a121ce581499d7b701668', '章娟', '11aaaa1@qq.com', '1540439503', '0', '0', '我不是很懒……', '361540440181.png', '0', '10', 'b6e993162e57266a2faf5a902a2fc486');
 INSERT INTO `user` VALUES ('37', '李正', '698d51a19d8a121ce581499d7b701668', '李正', '11aaaa1@qq.com', '1540440400', '1', '1', '这个人很懒，什么都没留下……', '371540470190.png', '0', '0', 'a5bfc9e07964f8dddeb95fc584cd965d');
 INSERT INTO `user` VALUES ('38', '跳与白胖', '698d51a19d8a121ce581499d7b701668', '跳与白胖', '11aaaa1@qq.com', '1540440799', '1', '0', '这个人很懒，什么都没留下……', '381540476328.png', '0', '0', 'a5771bce93e200c36f7cd9dfd0e5deaa');
-INSERT INTO `user` VALUES ('39', '同学1', '698d51a19d8a121ce581499d7b701668', '昵称', '1111@qq.com', '1547432518', '1', '1', '这个人很懒，什么都没留下……', null, '0', '0', '29615e5b139ab735c8ea542f1ad43118');
 
 -- ----------------------------
 -- Table structure for `webchat`

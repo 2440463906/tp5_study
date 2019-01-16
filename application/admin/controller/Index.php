@@ -59,6 +59,7 @@ class index extends Controller
         Db::table('announce')->where('id',input('id'))->delete();
         $this->redirect('index/announce');
     }
+    //添加公告
     public function addanno()
     {
         $data = input('post.');
@@ -90,11 +91,47 @@ class index extends Controller
         echo $this->view->fetch();
     }
 
+    //删除博客
+    public function delcomm()
+    {
+        Db::table('comment')->where('id',input('id'))->delete();
+        $this->redirect('index/comment');
+    }
+
     //系统管理
     public function system()
     {
-        // $this -> assign('attention',$attention);
+        $system = Db::table('admin_system')->find();
+        $this -> assign('system',$system);
         echo $this->view->fetch();
+    }
+    //更改系统
+    public function upsys()
+    {
+        $data = input('post.');
+        Db::table('admin_system')->where('id',1)->update($data);
+        $this->redirect('index/system');
+    }
+
+     //管理员管理
+    public function admin()
+    {
+        $admin = Db::table('admin_user')->select();
+        $this -> assign('admin',$admin);
+        echo $this->view->fetch();
+    }
+    //删除管理员
+    public function deladmin()
+    {
+        Db::table('admin_user')->where('id',input('id'))->delete();
+        $this->redirect('index/admin');
+    }
+    //添加管理员
+    public function addadmin()
+    {
+        $data = input('post.');
+        Db::table('admin_user')->insert($data);
+        $this->redirect('index/admin');
     }
     
 }

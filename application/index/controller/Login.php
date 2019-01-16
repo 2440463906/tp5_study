@@ -16,6 +16,7 @@ class Login extends Controller
     //登录验证
     public function verlogin()
     {
+       
          $validate = new Validate(
         [   //验证规则
             'username|用户名'  => 'require',
@@ -40,7 +41,8 @@ class Login extends Controller
            $this->error ('用户名或密码错误');
         }else{
             if($nu['state'] == 1){
-                $this->error("您已经被封号，请联系管理员解封！",url('index/index'));
+                $str = "您已经被封号，请联系管理员解封！";
+                $this->error($str,url('index/index'));
             }else{
             session('name', input('post.username'));
             $this->success("恭喜您！登录成功",url('index/index'));

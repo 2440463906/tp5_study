@@ -1,0 +1,24 @@
+{include file="head/header" /}
+
+  	<div class="col-md-9">
+  		<div class="panel panel-default">
+  			<div class="panel-body">
+  				<form  action="{:url('index/upsys')}" method="post">
+  				<table class="table table-striped">
+  				  	<caption><b>系统信息</b> <button type="submit" class="btn btn-success pull-right">更改</button></caption>
+				    <tr><td><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网页标题</b></td><td> 	<input class="form-control" type="text" name="title" value="{$system.title}"> </td></tr>
+				    <tr><td><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网页副标题</b></td><td> 	<input class="form-control" type="text" name="subhead" value="{$system.subhead}"> </td></tr>
+				    <tr><td><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理员QQ</b></td><td> 	<input class="form-control" type="text" name="admin_qq" value="{$system.admin_qq}"> </td></tr>
+				    <tr><td><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理员电话</b></td><td> 	<input class="form-control" type="text" name="admin_tel" value="{$system.admin_tel}"> </td></tr>
+				</table>
+				  
+
+				</form>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+</div>
+
+</body>
+</html>
