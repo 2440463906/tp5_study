@@ -39,8 +39,12 @@ class Login extends Controller
     	if($nu == null){ 
            $this->error ('用户名或密码错误');
         }else{
+            if($nu['state'] == 1){
+                $this->error("您已经被封号，请联系管理员解封！",url('index/index'));
+            }else{
             session('name', input('post.username'));
             $this->success("恭喜您！登录成功",url('index/index'));
+        }
         }
 
     }
@@ -72,6 +76,7 @@ class Login extends Controller
         $data=input('post.');
         $data['password'] = md5($data['password']);
         $data['create_time'] = time();
+        //私钥
         $data['secretkey'] = md5($data['username']);
         //返回错误信息
         if (!$validate->check($data)) {

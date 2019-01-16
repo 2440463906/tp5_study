@@ -1,0 +1,60 @@
+{include file="head/header" /}
+
+<script>
+function p_del() { 
+    var msg = "您真的确定要删除吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+      return true; 
+    }else{ 
+      return false; 
+    } 
+  }    
+</script>
+
+  	<div class="col-md-9">
+  		<div class="panel panel-default">
+  			<div class="panel-body">
+  				<table class="table table-hover">
+				  <caption>用户列表</caption>
+				  <thead>
+				    <tr>
+				      <th>id</th>
+				      <th>昵称</th>
+				      <th>性别</th>
+				      <th>等级</th>
+				      <th>职位</th>
+				      <th>账号状态</th>
+				      <th>邮箱</th>
+				      <th>更改/删除</th>
+				    </tr>
+				  </thead>
+				  {foreach $user as $key=>$vo } 
+				  <tbody>
+				    <tr>
+				    <form  action="{:url('index/upuser')}" method="post">
+				      <td>{$vo.id}<input type="hidden" name='id' value="{$vo.id}"></td>
+				      <td>{$vo.nickname}<p class="pull-right" ><abbr title="违规昵称">违规<input name="nickname" type="checkbox" class="pull-right"></abbr></p></td>
+				      <td><?php if($vo['sex']){ echo '男';}else{echo '女';}?></td>
+				      <td><?php echo floor($vo['experience']/100)." (".$vo['experience'].'/'.(floor(($vo['experience']+100)/100)*100).")"?></td>
+				      <td> <input type="text" name='rank' style="width: 60px" value="<?php if($vo['rank']){ echo '学生';}else{echo '教师';}?>"></td>
+				      <td>
+				      	<input type="radio" value="1" name="state" <?php if($vo['state']){echo "checked";}?> >封号
+				      	<input type="radio" value="0" name="state" <?php if(!$vo['state']){echo "checked";}?>>解封</td>
+				      <td>{$vo.email}</td>
+				      <td><button type="submit" class="btn btn-link">更改</button>| <a href="{:url('index/upuser',array('did'=>$vo['id']))}" onclick="javascript:return p_del()">删除</a></td>
+				    </form>
+				    </tr>
+				    
+				  </tbody>
+				  {/foreach}
+				</table>
+  				
+
+  			</div>
+  		</div>
+  	</div>
+  </div>
+</div>
+
+</body>
+</html>

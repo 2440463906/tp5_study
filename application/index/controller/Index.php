@@ -16,6 +16,9 @@ class index extends Controller
     	$user = db('user')->where('username',session('name'))->find();
     	$this -> assign('user',$user);
 
+        //公告
+        $announce = Db::table('announce')->select();
+        $this -> assign('announce',$announce);
 
     	//信息  判断跳转的页面是否为自己的主页
     	if(input('uid')==null||input('uid')==$user['id']){
@@ -191,7 +194,10 @@ class index extends Controller
         }else if(input('comment')!==null)
         {
             //评论博客
-             $article = Db::table('article')->alias('a')->join('comment b', 'a.id = b.aid')->join('user c', 'a.uid = c.id')->where('b.uid',input('comment'))->where('top',0)->group('aid')->order('id','desc')->field('a.*,c.nickname,c.face,c.rank')->select();
+            $article = Db::table('article')->alias('a')->join('comment b', 'a.id = b.aid')->join('user c', 'a.uid = c.id')->where('b.uid',input('comment'))->where('top',0)->group('aid')->order('id','desc')->field('a.*,c.nickname,c.face,c.rank')->select();
+        }else if(input('collection')!==null){
+            //收藏博客
+             $article = Db::table('article')->alias('a')->join('collection b', 'a.id = b.aid')->join('user c', 'a.uid = c.id')->where('b.username',session("name"))->where('top',0)->order('id','desc')->field('a.*,c.nickname,c.face,c.rank')->select();
         }else{
             //最新博客
             $article = Db::table('article')->alias('a')->join('user b', 'a.uid = b.id')->where('top',0)->order('id','desc')->field('a.*,b.nickname,b.face,b.rank')->select();
@@ -277,14 +283,17 @@ class index extends Controller
             $class["$key"]['title'] = db('twork')->where('cname',$value['cname'])->select();
             
                 foreach ($class["$key"]['title'] as $ke => $value) {
+
                       if(Db::table('swork')->where('wid',$value['id'])->where('uid',$user['id'])->find()== null){
                          $class["$key"]['title']["$ke"]['state'] = 0;
+                         $class["$key"]['title']["$ke"]['work'] = "";
                       }else{
                           $class["$key"]['title']["$ke"]['state'] = 1;
+                          $class["$key"]['title']["$ke"]['work'] = Db::table('swork')->where('uid',$user['id'])->where('wid',$class["$key"]['title']["$ke"]['id'])->find();
                       }
                     
                 }
-            //dump($class["$key"]['title']);
+            // dump($class["$key"]['title']);
         }
         
 
@@ -312,13 +321,14 @@ class index extends Controller
     //写作业
     public function writework()
     {
-        $data = input('post.');        
+        $data = input('post.');     
         
         if(input('post.wid') == null){
             $this->error("作业全部完成,不用再提交");
         }
 
         $uid = $data['uid'];
+        $wid = $data['wid'];
         if(!Db::table('swork')->where('wid',$wid)->where('uid',$uid)->find()){
             Db::table('swork')->insert($data);
         }
@@ -452,16 +462,16 @@ class index extends Controller
         echo $this->view->fetch();
     }
 
-    //添加关注
+    //添加收藏
     public function addcollect()
     {
-        Db::table('collection')->insert(['nickname'=>session('name'),'aid'=>input('aid')]);
+        Db::table('collection')->insert(['username'=>session('name'),'aid'=>input('aid')]);
         echo "<script>window.history.go(-1);location.reload()</script>";
     }
-    //取消关注
+    //取消收藏
     public function delcollect()
     {
-        Db::table('collection')->where(['nickname'=>session('name'),'aid'=>input('aid')])->delete();
+        Db::table('collection')->where(['username'=>session('name'),'aid'=>input('aid')])->delete();
 
         echo "<script>window.history.go(-1);location.reload()</script>";
 

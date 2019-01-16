@@ -20,10 +20,10 @@ body {padding: 60px}
 	<div class="navbar-header">
 	  <button type="button" class="navbar-toggle" data-toggle="collapse"
 	            data-target="#example-navbar-collapse"> <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-	  <a class="navbar-brand" href="{:url('index/index')}">课程教学辅助系统 —— <i>计算机导论</i></a> </div>
-	<form class="navbar-form navbar-left" role="search">
+	  <a class="navbar-brand" href="{:url('index/index')}"><b>课程教学辅助系统</b> —— <i>计算机导论</i></a> </div>
+	<form class="navbar-form navbar-left" role="search" action="{:url('other/seleinfo')}" method="post">
 	  <div class="form-group">
-	    <input type="text" class="form-control" placeholder="查找学生信息">
+	    <input type="text" class="form-control" name='nickname' placeholder="查找学生信息">
 	  </div>
 	  <button type="submit" class="btn btn-default">提交按钮</button>
 	</form>
@@ -34,7 +34,7 @@ body {padding: 60px}
 	      <ul class="dropdown-menu">
 	        <li><a href="{:url('index/bloglist',array('uid'=>$user['id']))}">我的发帖</a></li>
 	        <li><a href="{:url('index/bloglist',array('comment'=>$user['id']))}">我的评论</a></li>
-	        <li><a href="#">我的收藏</a></li>
+	        <li><a href="{:url('index/bloglist',array('collection'=>$user['id']))}">我的收藏</a></li>
 	        <li class="divider"></li>
 	        <li><a href="{:url('index/bloglist')}">讨论区</a></li>
 	        <li class="divider"></li>
@@ -90,7 +90,11 @@ body {padding: 60px}
           公告
         </div>
         <div class="panel-body">
-          公告
+          {foreach $announce as $key=>$vo } 
+              <h4><b>{$vo.title}</b></h4>
+              {$vo.content} <hr>
+               
+          {/foreach}
         </div>
       </div>
 

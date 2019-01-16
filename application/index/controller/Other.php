@@ -44,6 +44,7 @@ class other extends Controller
     	echo $this->view->fetch();
     	
     }
+    //发言
     public function addchat()
     {
         $data=input('post.');
@@ -51,5 +52,11 @@ class other extends Controller
         $data['user'] = session('name');
         Db::table('webchat')->insert($data);
         $this->redirect('other/webchat',['cname'=>$data['cname']]);
+    }
+    //查找用户信息
+    public function seleinfo()
+    {
+        $uid = Db::table('user')->where('nickname',input('nickname'))->value('id');
+        $this->redirect("Index/index",array("uid"=>$uid));
     }
 }

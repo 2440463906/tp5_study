@@ -77,10 +77,27 @@
               <?php if(!$user['rank']){?> 
               <a class="pull-right" href="{:url('index/showwork',array('wid'=>$value['id']))}">修改作业</a> 
               <?php }else{?>
-              <img style="vertical-align:text-bottom" width="30" src="__PUBLIC__/static/index/img/work/state/{$value.state}.png"class="img-circle pull-right"><p class="pull-right">状态： </p>
+              <img style="vertical-align:text-bottom" width="30" src="__PUBLIC__/static/index/img/work/state/{$value.state}.png"class="img-circle pull-right"><p class="pull-right">提交状态： </p>
               <?php }?>
             </td></tr>
-            <tr><td>{$value.content}</td></tr>
+            <tr><td>
+              {$value.content} 
+              <?php if($value['work'] != null){?>
+              <br><br>
+              <div class="panel panel-default">
+                  <div class="panel-body">
+                    <?php
+                      if($value['work']['grade'] != null){
+                        echo "评分：".$value['work']['grade']."<br>评价：".$value['work']['grade'];
+                      }else{
+                        echo "教师未评价";
+                      }
+                    ?>
+                  </div>
+              </div>
+              <?php }?>
+
+            </td></tr>
           </table>
          {/volist}
         </div>
